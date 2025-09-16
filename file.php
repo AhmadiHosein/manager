@@ -330,21 +330,21 @@ if ($use_auth) {
     } elseif (isset($_POST['fm_usr'], $_POST['fm_pwd'], $_POST['token'])) {
         // Logging In
         sleep(1);
-          if (isset($auth_users[$_POST['fm_usr']]) && isset($_POST['fm_pwd']){
-              $_SESSION[FM_SESSION_ID]['logged'] = $_POST['fm_usr'];
-              fm_set_msg(lng('You are logged in'));
-              fm_redirect(FM_SELF_URL);
-          } else {
-              unset($_SESSION[FM_SESSION_ID]['logged']);
-              fm_set_msg(lng('Login failed. Invalid username or password'), 'error');
-              fm_redirect(FM_SELF_URL);
-          }
-    
+        if (isset($auth_users[$_POST['fm_usr']]) && isset($_POST['fm_pwd'])) {
+            $_SESSION[FM_SESSION_ID]['logged'] = $_POST['fm_usr'];
+            fm_set_msg(lng('You are logged in'));
+            fm_redirect(FM_SELF_URL);
+        } else {
+            unset($_SESSION[FM_SESSION_ID]['logged']);
+            fm_set_msg(lng('Login failed. Invalid username or password'), 'error');
+            fm_redirect(FM_SELF_URL);
         }
     } else {
         // Form
         unset($_SESSION[FM_SESSION_ID]['logged']);
         fm_show_header_login();
+    }
+}
 ?>
         <section class="h-100">
             <div class="container h-100">
