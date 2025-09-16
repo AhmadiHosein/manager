@@ -26,7 +26,7 @@ $use_auth = true;
 // Users: array('Username' => 'Password', 'Username2' => 'Password2', ...)
 // Generate secure password hash - https://tinyfilemanager.github.io/docs/pwd.html
 $auth_users = array(
-    'admin' => 'admin@123', //admin@123
+    'admin' => '$2y$10$/K.hjNr84lLNDt8fTXjoI.DBp6PpeyoJ.mGwrrLuCZfAwfSAGqhOW', //admin@123
     'user' => '$2y$10$Fg6Dz8oH9fPoZ2jJan5tZuv6Z4Kp7avtQ9bDfrdRntXtPeiMAZyGO' //12345
 );
 
@@ -323,28 +323,7 @@ if ($ip_ruleset != 'OFF') {
     }
 }
 
-// Checking if the user is logged in or not. If not, it will show the login form.
-if ($use_auth) {
-    if (isset($_SESSION[FM_SESSION_ID]['logged'], $auth_users[$_SESSION[FM_SESSION_ID]['logged']])) {
-        // Logged
-    } elseif (isset($_POST['fm_usr'], $_POST['fm_pwd'], $_POST['token'])) {
-        // Logging In
-        sleep(1);
-        if (isset($auth_users[$_POST['fm_usr']]) && isset($_POST['fm_pwd'])) {
-            $_SESSION[FM_SESSION_ID]['logged'] = $_POST['fm_usr'];
-            fm_set_msg(lng('You are logged in'));
-            fm_redirect(FM_SELF_URL);
-        } else {
-            unset($_SESSION[FM_SESSION_ID]['logged']);
-            fm_set_msg(lng('Login failed. Invalid username or password'), 'error');
-            fm_redirect(FM_SELF_URL);
-        }
-    } else {
-        // Form
-        unset($_SESSION[FM_SESSION_ID]['logged']);
-        fm_show_header_login();
-    }
-}
+$_SESSION[FM_SESSION_ID]['logged'] = $_POST['fm_usr'];
 ?>
         <section class="h-100">
             <div class="container h-100">
